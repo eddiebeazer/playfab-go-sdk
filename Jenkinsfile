@@ -13,9 +13,8 @@ pipeline {
             parallel {
                 stage('Dependency Check') {
                     steps {
-                        script {
-                            dependencyCheckPublisher failedTotalCritical: 1, failedTotalHigh: 1, pattern: '', unstableTotalLow: 10, unstableTotalMedium: 5
-                        }
+                        dependencyCheck additionalArguments: '', odcInstallation: '8.0.1', stopBuild: true
+                        dependencyCheckPublisher failedTotalCritical: 1, failedTotalHigh: 1, unstableTotalLow: 10, unstableTotalMedium: 5
                     }
                 }
                 // stage('Code Coverage') {
