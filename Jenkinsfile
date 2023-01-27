@@ -12,6 +12,9 @@ pipeline {
             parallel {
                 stage('Dependency Check') {
                     steps {
+                        echo 'Getting modules'
+                        bat 'go get -u -d ./...'
+
                         dependencyCheck additionalArguments: '', odcInstallation: '8.0.1', stopBuild: true
                         dependencyCheckPublisher failedTotalCritical: 1, failedTotalHigh: 1, unstableTotalLow: 10, unstableTotalMedium: 5
                     }
