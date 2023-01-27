@@ -14,12 +14,12 @@ pipeline {
                     tools { go '1.18' }
                     steps {
                         script {
-                            bat '%GOPATH%'
                             echo 'Getting modules'
                             bat 'go get -u -d ./...'
 
                             echo 'Installing Test Reporters'
-                            bat 'go install -x -v github.com/axw/gocov/gocov@latest github.com/AlekSi/gocov-xml@latest'
+                            bat 'go install -x -v github.com/axw/gocov/gocov@latest'
+                            bat 'go install -x -v github.com/AlekSi/gocov-xml@latest'
 
                             echo 'Code Coverage'
                             bat 'gocov test ./... | gocov-xml > coverage.xml'
