@@ -14,6 +14,9 @@ pipeline {
                 stage('Code Coverage') {
                     steps {
                         script {
+                            echo 'Find Go Root'
+                            bat "%GOROOT%"
+                            
                             echo 'Getting modules'
                             bat 'go get -u -d ./...'
 
