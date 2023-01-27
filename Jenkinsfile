@@ -14,8 +14,8 @@ pipeline {
                     agent {
                         docker {
                             image 'golang:1.18.1-alpine'
+                            label 'DockerLinux'
                         }
-                        label 'DockerLinux'
                     }
                     steps {
                         script {
@@ -35,8 +35,8 @@ pipeline {
                     agent {
                         docker {
                             image 'golang:1.18.1-alpine'
+                            label 'DockerLinux'
                         }
-                        label 'DockerLinux'
                     }
                     steps {
                         script {
