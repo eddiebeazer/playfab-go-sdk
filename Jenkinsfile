@@ -5,8 +5,8 @@ pipeline {
         PLAYFAB_TITLE_ID = credentials('playfab-test-title-id')
     }
     tools {
-        go '1.18'
-        dependency-check '8.0.1'
+        go "1.18"
+        dependency-check "8.0.1"
     }
     stages {
         stage('Testing') {
