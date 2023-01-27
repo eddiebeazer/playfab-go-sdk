@@ -18,8 +18,8 @@ pipeline {
                             bat '%GOROOT%\\bin\\go get -u -d ./...'
 
                             echo 'Installing Test Reporters'
-                            bat '%GOROOT%\\bin\\go install github.com/axw/gocov/gocov@latest'
-                            bat '%GOROOT%\\bin\\go install github.com/AlekSi/gocov-xml@latest'
+                            bat '%GOROOT%\\bin\\go install -x -v github.com/axw/gocov/gocov@latest'
+                            bat '%GOROOT%\\bin\\go install -x -v github.com/AlekSi/gocov-xml@latest'
 
                             echo 'Code Coverage'
                             bat '%GOROOT%\\bin\\gocov test ./... | %GOROOT%\\bin\\gocov-xml > coverage.xml'
