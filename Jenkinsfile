@@ -26,7 +26,6 @@ pipeline {
                         script {
                             echo 'Getting modules'
                             bat 'go get -u -d ./...'
-<<<<<<< HEAD
 
                             echo 'JUnit Report'
                             bat 'go test -v 2>&1 ./... | go-junit-report -set-exit-code > report.xml'
@@ -34,11 +33,6 @@ pipeline {
                             withChecks('Unit Tests') {
                                 junit 'report.xml'
                             }
-=======
-
-                            echo 'JUnit Report'
-                            bat 'go test -v 2>&1 ./... | go-junit-report -set-exit-code > report.xml'
->>>>>>> pipeline
                         }
                     }
                 }
