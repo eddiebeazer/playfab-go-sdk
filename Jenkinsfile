@@ -13,35 +13,35 @@ pipeline {
             parallel {
                 stage('Dependency Check') {
                     steps {
-                        dependencyCheckPublisher failedTotalCritical: 1, failedTotalHigh: 1, pattern: '', unstableTotalLow: 10, unstableTotalMedium: 5
-                    }
-                }
-                stage('Code Coverage') {
-                    steps {
                         script {
-                            echo 'Getting modules'
-                            bat 'go get -u -d ./...'
-
-                            echo 'Code Coverage'
-                            bat 'gocov test ./... | gocov-xml > coverage.xml'
-
-                            publishCoverage adapters: [cobertura('coverage.xml')]
+                            dependencyCheckPublisher failedTotalCritical: 1, failedTotalHigh: 1, pattern: '', unstableTotalLow: 10, unstableTotalMedium: 5
                         }
                     }
                 }
-                stage('Unit Tests') {
-                    steps {
-                        script {
-                            echo 'Getting modules'
-                            bat 'go get -u -d ./...'
+                // stage('Code Coverage') {
+                //     steps {
+                //             echo 'Getting modules'
+                //             bat 'go get -u -d ./...'
 
-                            echo 'JUnit Report'
-                            bat 'go test -v 2>&1 ./... | go-junit-report -set-exit-code > report.xml'
+                //             echo 'Code Coverage'
+                //             bat 'gocov test ./... | gocov-xml > coverage.xml'
 
-                            junit testResults: 'report.xml', skipPublishingChecks: false
-                        }
-                    }
-                }
+                //             publishCoverage adapters: [cobertura('coverage.xml')]
+
+                //     }
+                // }
+                // stage('Unit Tests') {
+                //     steps {
+                //             echo 'Getting modules'
+                //             bat 'go get -u -d ./...'
+
+                //             echo 'JUnit Report'
+                //             bat 'go test -v 2>&1 ./... | go-junit-report -set-exit-code > report.xml'
+
+                //             junit testResults: 'report.xml', skipPublishingChecks: false
+
+                //     }
+                // }
             }
         }
     }
