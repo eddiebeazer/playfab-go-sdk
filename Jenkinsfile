@@ -4,11 +4,11 @@ pipeline {
         PLAYFAB_SECRET     = credentials('playfab-test-secret-key')
         PLAYFAB_TITLE_ID = credentials('playfab-test-title-id')
     }
+    tools { go '1.18' }
     stages {
         stage('Testing') {
             parallel {
                 stage('Code Coverage') {
-                    tools { go '1.18' }
                     steps {
                         script {
                             echo 'Getting modules'
