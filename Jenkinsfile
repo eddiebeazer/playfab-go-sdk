@@ -14,9 +14,6 @@ pipeline {
                 stage('Code Coverage') {
                     steps {
                         script {
-                            echo 'Find Go Root'
-                            bat "%GOROOT%"
-                            
                             echo 'Getting modules'
                             bat 'go get -u -d ./...'
 
@@ -25,7 +22,7 @@ pipeline {
                             bat 'go install github.com/AlekSi/gocov-xml@latest'
 
                             echo 'Code Coverage'
-                            bat 'gocov test ./... | gocov-xml > coverage.xml'
+                            bat '%GOROOT%\\bin\\gocov test ./... | %GOROOT%\\bin\\gocov-xml > coverage.xml'
                         }
                     }
                 }
