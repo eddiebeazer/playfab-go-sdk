@@ -17,7 +17,7 @@ pipeline {
                             echo 'Code Coverage'
                             bat 'gocov test ./... | gocov-xml > coverage.xml'
 
-                            publishCoverage adapters: [cobertura('coverage.xml')], checksName: '', sourceFileResolver: sourceFiles('NEVER_STORE')
+                            publishCoverage adapters: [cobertura('coverage.xml')]
                         }
                     }
                 }
@@ -29,8 +29,6 @@ pipeline {
 
                             echo 'JUnit Report'
                             bat 'go test -v 2>&1 ./... | go-junit-report -set-exit-code > report.xml'
-
-                            //bat 'go test -v 2>&1 ./... | E:\\jenkins\\tools\\org.jenkinsci.plugins.golang.GolangInstallation\\1.18\\bin\\go-junit-report -set-exit-code > report.xml'
 
                             withChecks('Unit Tests') {
                                 junit 'report.xml'
