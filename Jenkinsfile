@@ -15,14 +15,14 @@ pipeline {
                     steps {
                         script {
                             echo 'Getting modules'
-                            bat '%GOROOT%\\bin\\go get -u -d ./...'
+                            bat 'go get -u -d ./...'
 
                             echo 'Installing Test Reporters'
-                            bat '%GOROOT%\\bin\\go install -x -v github.com/axw/gocov/gocov@latest'
-                            bat '%GOROOT%\\bin\\go install -x -v github.com/AlekSi/gocov-xml@latest'
+                            bat 'go install -x -v github.com/axw/gocov/gocov@latest'
+                            bat 'go install -x -v github.com/AlekSi/gocov-xml@latest'
 
                             echo 'Code Coverage'
-                            bat '%GOROOT%\\bin\\gocov test ./... | %GOROOT%\\bin\\gocov-xml > coverage.xml'
+                            bat 'gocov test ./... | gocov-xml > coverage.xml'
                         }
                     }
                 }
