@@ -14,7 +14,7 @@ pipeline {
                     tools { go '1.18' }
                     steps {
                         script {
-                            bat 'echo %GOPATH%'
+                            bat '%GOPATH%'
                             echo 'Getting modules'
                             bat 'go get -u -d ./...'
 
