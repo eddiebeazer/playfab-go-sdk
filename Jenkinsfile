@@ -6,7 +6,7 @@ pipeline {
     }
     tools {
         go '1.18'
-        dependencyCheck '8.0.1'
+        dependency-check '8.0.1'
     }
     stages {
         stage('Testing') {
