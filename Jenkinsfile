@@ -15,20 +15,19 @@ pipeline {
                         docker {
                             image 'golang:1.18.1-alpine'
                             label 'DockerLinux'
-                            reuseNode true
                         }
                     }
                     steps {
                         script {
                             echo 'Getting modules'
-                            sh 'go get -u -d ./...'
+                            bat 'go get -u -d ./...'
 
                             echo 'Installing Test Reporters'
-                            sh 'go install github.com/axw/gocov/gocov@latest'
-                            sh 'go install github.com/AlekSi/gocov-xml@latest'
+                            bat 'go install github.com/axw/gocov/gocov@latest'
+                            bat 'go install github.com/AlekSi/gocov-xml@latest'
 
                             echo 'Code Coverage'
-                            sh 'gocov test ./... | gocov-xml > coverage.xml'
+                            bat 'gocov test ./... | gocov-xml > coverage.xml'
                         }
                     }
                 }
@@ -37,19 +36,18 @@ pipeline {
                         docker {
                             image 'golang:1.18.1-alpine'
                             label 'DockerLinux'
-                            reuseNode true
                         }
                     }
                     steps {
                         script {
                             echo 'Getting modules'
-                            sh 'go get -u -d ./...'
+                            bat 'go get -u -d ./...'
 
                             echo 'Installing Test Reporters'
-                            sh 'go install github.com/jstemmer/go-junit-report/v2@latest'
+                            bat 'go install github.com/jstemmer/go-junit-report/v2@latest'
 
                             echo 'JUnit Report'
-                            sh 'go test -v 2>&1 ./... | go-junit-report -set-exit-code > report.xml'
+                            bat 'go test -v 2>&1 ./... | go-junit-report -set-exit-code > report.xml'
                         }
                     }
                 }
