@@ -15,6 +15,7 @@ pipeline {
                         docker {
                             image 'golang:1.18.1-alpine'
                             label 'DockerLinux'
+                            reuseNode true
                         }
                     }
                     steps {
@@ -36,6 +37,7 @@ pipeline {
                         docker {
                             image 'golang:1.18.1-alpine'
                             label 'DockerLinux'
+                            reuseNode true
                         }
                     }
                     steps {
