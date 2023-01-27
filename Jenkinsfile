@@ -4,9 +4,6 @@ pipeline {
         PLAYFAB_SECRET     = credentials('playfab-test-secret-key')
         PLAYFAB_TITLE_ID = credentials('playfab-test-title-id')
     }
-    options {
-        parallelsAlwaysFailFast()
-    }
     stages {
         stage('Testing') {
             parallel {
@@ -19,6 +16,8 @@ pipeline {
 
                             echo 'Code Coverage'
                             bat 'gocov test ./... | gocov-xml > coverage.xml'
+
+                            publishCoverage adapters: [cobertura('coverage.xml')], checksName: '', sourceFileResolver: sourceFiles('NEVER_STORE')
                         }
                     }
                 }
@@ -30,6 +29,10 @@ pipeline {
 
                             echo 'JUnit Report'
                             bat 'go test -v 2>&1 ./... | go-junit-report -set-exit-code > report.xml'
+
+                            withChecks('Unit Tests') {
+                                junit 'report.xml'
+                            }
                         }
                     }
                 }

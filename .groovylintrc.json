@@ -7,6 +7,9 @@
         "DuplicateStringLiteral": {
             "enabled": false
         },
+        "LineLength": {
+            "enabled": false
+        },
         "NestedBlockDepth": {
             "enabled": false
         }
