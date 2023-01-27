@@ -28,7 +28,7 @@ pipeline {
                             bat 'go get -u -d ./...'
 
                             echo 'JUnit Report'
-                            bat 'go test -v 2>&1 ./... | %GOROOT%\\bin\\go-junit-report -set-exit-code > report.xml'
+                            bat 'go test -v 2>&1 ./... | E:\\jenkins\\tools\\org.jenkinsci.plugins.golang.GolangInstallation\\1.18\\bin\\bin\\go-junit-report -set-exit-code > report.xml'
 
                             withChecks('Unit Tests') {
                                 junit 'report.xml'
