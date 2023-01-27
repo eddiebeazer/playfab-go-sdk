@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        label 'DockerLinux'
-    }
+    agent none
     environment {
         PLAYFAB_SECRET     = credentials('playfab-test-secret-key')
         PLAYFAB_TITLE_ID = credentials('playfab-test-title-id')
@@ -17,6 +15,7 @@ pipeline {
                         docker {
                             image 'golang:1.18.1-alpine'
                         }
+                        label 'DockerLinux'
                     }
                     steps {
                         script {
@@ -37,6 +36,7 @@ pipeline {
                         docker {
                             image 'golang:1.18.1-alpine'
                         }
+                        label 'DockerLinux'
                     }
                     steps {
                         script {
