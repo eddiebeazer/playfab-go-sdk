@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     docker.image('golang:1.18.1-alpine').inside {
-                        sh 'go get -u -d ./...'
+                        bat 'go get -u -d ./...'
                     }
                 }
             }
