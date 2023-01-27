@@ -14,6 +14,7 @@ pipeline {
                     tools { go '1.18' }
                     steps {
                         script {
+                            bat "for %i in (go) do @echo. %~$PATH:i"
                             echo 'Getting modules'
                             bat 'go get -u -d ./...'
 
