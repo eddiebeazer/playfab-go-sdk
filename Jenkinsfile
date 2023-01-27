@@ -8,6 +8,16 @@ pipeline {
         parallelsAlwaysFailFast()
     }
     stages {
+        stage('Test') {
+            agent { label 'DockerLinux' }
+            steps {
+                script {
+                    docker.image('golang:1.18.1-alpine').inside {
+                        sh 'go get -u -d ./...'
+                    }
+                }
+            }
+        }
         stage('Testing') {
             parallel {
                 stage('Code Coverage') {
@@ -19,6 +29,14 @@ pipeline {
                     }
                     steps {
                         script {
+                //                                /* the return value gets caught and saved into the variable MY_CONTAINER */
+                //             MY_CONTAINER = bat(script: '@docker run -d -i python:3.10.7-alpine', returnStdout: true).trim()
+                //             echo "mycontainer_id is ${MY_CONTAINER}"
+                //    /* python --version gets executed inside the Container */
+                //             bat "docker exec ${MY_CONTAINER} python --version "
+                //    /* the Container gets removed */
+                //             bat "docker rm -f ${MY_CONTAINER}"
+
                             echo 'Getting modules'
                             bat 'go get -u -d ./...'
 
