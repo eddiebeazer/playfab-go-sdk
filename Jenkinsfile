@@ -8,40 +8,12 @@ pipeline {
         go '1.18'
     }
     stages {
+        stage('Installing Dependencies') {
+            echo 'Getting modules'
+            sh 'go get -u -d ./...'
+        }
         stage('Testing') {
-            parallel {
-                stage('Dependency Check') {
-                    steps {
-                        echo 'Getting modules'
-                        bat 'go get -u -d ./...'
-
-                        dependencyCheck additionalArguments: '', odcInstallation: '8.0.1', stopBuild: true
-                        dependencyCheckPublisher failedTotalCritical: 1, failedTotalHigh: 1, unstableTotalLow: 10, unstableTotalMedium: 5
-                    }
-                }
-                stage('Code Coverage') {
-                    steps {
-                        echo 'Getting modules'
-                        bat 'go get -u -d ./...'
-
-                        echo 'Code Coverage'
-                        bat 'gocov test ./... | gocov-xml > coverage.xml'
-
-                        publishCoverage adapters: [cobertura('coverage.xml')]
-                    }
-                }
-                stage('Unit Tests') {
-                    steps {
-                        echo 'Getting modules'
-                        bat 'go get -u -d ./...'
-
-                        echo 'JUnit Report'
-                        bat 'go test -v 2>&1 ./... | go-junit-report -set-exit-code > report.xml'
-
-                        junit testResults: 'report.xml', skipPublishingChecks: false
-                    }
-                }
-            }
+            goTest()
         }
     }
 }
