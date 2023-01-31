@@ -1,3 +1,3 @@
-nodeFirebasePipeline (
+goPipeline (
     deploy: false
 )
