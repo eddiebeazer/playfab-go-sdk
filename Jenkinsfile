@@ -11,8 +11,9 @@ pipeline {
     }
     stages {
         stage('Installing Dependencies') {
-            echo 'Getting modules'
-            sh 'go get -u -d ./...'
+            steps {
+                sh 'go get -u -d ./...'
+            }
         }
         stage('Testing') {
             goTest()
