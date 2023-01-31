@@ -16,7 +16,9 @@ pipeline {
             }
         }
         stage('Testing') {
-            goTest()
+            stages {
+                goTest()
+            }
         }
     }
 }
